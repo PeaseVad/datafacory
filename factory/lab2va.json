@@ -1,0 +1,9 @@
+{
+	"name": "lab2va",
+	"location": "westeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "8258d670-43a4-4fc4-870a-5cb778499cd0",
+		"tenantId": "63ed9614-10a4-4a34-b9c8-47cdb830b400"
+	}
+}
