@@ -453,70 +453,11 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "SetFiles",
-						"type": "SetVariable",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "Files",
-							"value": [
-								"colors",
-								"inventories",
-								"inventory_parts",
-								"part_categories",
-								"parts",
-								"sets",
-								"themes"
-							]
-						}
-					},
-					{
-						"name": "If Condition1",
-						"type": "IfCondition",
-						"dependsOn": [
-							{
-								"activity": "SetFiles",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"expression": {
-								"value": "@pipeline().parameters.LoadAllFiles",
-								"type": "Expression"
-							},
-							"ifTrueActivities": [
-								{
-									"name": "Append Inventory Sets",
-									"type": "AppendVariable",
-									"dependsOn": [],
-									"userProperties": [],
-									"typeProperties": {
-										"variableName": "Files",
-										"value": "inventory_sets"
-									}
-								},
-								{
-									"name": "Append Part Relationships",
-									"type": "AppendVariable",
-									"dependsOn": [],
-									"userProperties": [],
-									"typeProperties": {
-										"variableName": "Files",
-										"value": "part_relationships"
-									}
-								}
-							]
-						}
-					},
-					{
 						"name": "ForEach File",
 						"type": "ForEach",
 						"dependsOn": [
 							{
-								"activity": "If Condition1",
+								"activity": "Filter1",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -525,7 +466,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"items": {
-								"value": "@variables('Files')",
+								"value": "@activity('Filter1').output.value",
 								"type": "Expression"
 							},
 							"activities": [
@@ -542,7 +483,7 @@
 										"waitOnCompletion": true,
 										"parameters": {
 											"FileName": {
-												"value": "@item()",
+												"value": "@item().SourceFileName",
 												"type": "Expression"
 											}
 										}
@@ -550,25 +491,114 @@
 								}
 							]
 						}
+					},
+					{
+						"name": "Lookup Config",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"dataset": {
+								"referenceName": "ADLS_Config",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "Filter1",
+						"type": "Filter",
+						"dependsOn": [
+							{
+								"activity": "Lookup Config",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Lookup Config').output.value",
+								"type": "Expression"
+							},
+							"condition": {
+								"value": "@equals(item().IsActive, 1)",
+								"type": "Expression"
+							}
+						}
 					}
 				],
-				"parameters": {
-					"LoadAllFiles": {
-						"type": "bool"
-					}
-				},
-				"variables": {
-					"Files": {
-						"type": "Array"
-					},
-					"ListOfFiles": {
-						"type": "String"
-					}
-				},
 				"annotations": []
 			},
 			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ADLS_Config')]",
 				"[concat(variables('factoryId'), '/pipelines/Lego_HTTP_to_ADLS_Themes')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ADLS_Config')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLS_cathrinewadlsva",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "config.txt",
+						"folderPath": "config",
+						"fileSystem": "lego"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "SourceSystem",
+						"type": "String"
+					},
+					{
+						"name": "SourceFileName",
+						"type": "String"
+					},
+					{
+						"name": "SourceFileExtension",
+						"type": "String"
+					},
+					{
+						"name": "IsActive",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADLS_cathrinewadlsva')]"
 			]
 		}
 	]
