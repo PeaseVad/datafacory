@@ -143,11 +143,11 @@
 						"userProperties": [
 							{
 								"name": "Source",
-								"value": "themes.csv.gz"
+								"value": "@{pipeline().parameters.FileName}.csv.gz"
 							},
 							{
 								"name": "Destination",
-								"value": "lego/data/themes.csv"
+								"value": "lego/data/@{pipeline().parameters.FileName}.csv"
 							}
 						],
 						"typeProperties": {
@@ -195,7 +195,10 @@
 								"referenceName": "SourceDataset_xnl",
 								"type": "DatasetReference",
 								"parameters": {
-									"FileName": "themes.csv.gz"
+									"FileName": {
+										"value": "@pipeline().parameters.FileName",
+										"type": "Expression"
+									}
 								}
 							}
 						],
@@ -203,11 +206,22 @@
 							{
 								"referenceName": "DestinationDataset_xnl",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"FileName": {
+										"value": "@pipeline().parameters.FileName",
+										"type": "Expression"
+									}
+								}
 							}
 						]
 					}
 				],
+				"parameters": {
+					"FileName": {
+						"type": "String",
+						"defaultValue": "FileName"
+					}
+				},
 				"annotations": [],
 				"lastPublishTime": "2021-05-13T13:01:44Z"
 			},
@@ -247,12 +261,21 @@
 					"referenceName": "ADLS_cathrinewadlsva",
 					"type": "LinkedServiceReference"
 				},
+				"parameters": {
+					"FileName": {
+						"type": "string",
+						"defaultValue": "FileName"
+					}
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "themes.csv",
+						"fileName": {
+							"value": "@{dataset().FileName}.csv",
+							"type": "Expression"
+						},
 						"folderPath": "data",
 						"fileSystem": "lego"
 					},
@@ -288,7 +311,7 @@
 					"location": {
 						"type": "HttpServerLocation",
 						"relativeUrl": {
-							"value": "@dataset().FileName",
+							"value": "@{dataset().FileName}.csv.gz",
 							"type": "Expression"
 						}
 					},
