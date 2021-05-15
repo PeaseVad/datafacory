@@ -5,6 +5,12 @@
 			"referenceName": "ADLS_cathrinewadlsva",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"TargetFileName": {
+				"type": "string",
+				"defaultValue": "TargetFileName"
+			}
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
