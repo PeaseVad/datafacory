@@ -36,7 +36,19 @@
 					"expression": {
 						"value": "@pipeline().parameters.LoadAllFiles",
 						"type": "Expression"
-					}
+					},
+					"ifTrueActivities": [
+						{
+							"name": "Append Inventory Sets",
+							"type": "AppendVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "Files",
+								"value": "inventory_sets"
+							}
+						}
+					]
 				}
 			}
 		],
