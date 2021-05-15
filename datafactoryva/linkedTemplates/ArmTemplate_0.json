@@ -128,14 +128,7 @@
 								{
 									"name": "Append Part Relationships",
 									"type": "AppendVariable",
-									"dependsOn": [
-										{
-											"activity": "Append Inventory Sets",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
+									"dependsOn": [],
 									"userProperties": [],
 									"typeProperties": {
 										"variableName": "Files",
