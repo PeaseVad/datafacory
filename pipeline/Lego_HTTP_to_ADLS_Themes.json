@@ -68,7 +68,10 @@
 						"referenceName": "SourceDataset_xnl",
 						"type": "DatasetReference",
 						"parameters": {
-							"FileName": "themes.csv.gz"
+							"FileName": {
+								"value": "@pipeline().parameters.FileName",
+								"type": "Expression"
+							}
 						}
 					}
 				],
@@ -80,6 +83,12 @@
 				]
 			}
 		],
+		"parameters": {
+			"FileName": {
+				"type": "String",
+				"defaultValue": "FileName"
+			}
+		},
 		"annotations": [],
 		"lastPublishTime": "2021-05-13T13:01:44Z"
 	},
