@@ -1,6 +1,26 @@
 {
 	"name": "variables_test",
 	"properties": {
+		"activities": [
+			{
+				"name": "SetFiles",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Files",
+					"value": [
+						""
+					]
+				}
+			},
+			{
+				"name": "If Condition1",
+				"type": "IfCondition",
+				"dependsOn": [],
+				"userProperties": []
+			}
+		],
 		"variables": {
 			"Files": {
 				"type": "Array"
