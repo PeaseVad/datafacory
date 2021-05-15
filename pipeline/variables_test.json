@@ -52,7 +52,11 @@
 							"name": "Append Part Relationships",
 							"type": "AppendVariable",
 							"dependsOn": [],
-							"userProperties": []
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "Files",
+								"value": "part_relationships"
+							}
 						}
 					]
 				}
