@@ -16,11 +16,11 @@
 				"userProperties": [
 					{
 						"name": "Source",
-						"value": "themes.csv.gz"
+						"value": "@{pipeline().parameters.FileName}"
 					},
 					{
 						"name": "Destination",
-						"value": "lego/data/themes.csv"
+						"value": "lego/data/@{'<TargetFileName>'}"
 					}
 				],
 				"typeProperties": {
