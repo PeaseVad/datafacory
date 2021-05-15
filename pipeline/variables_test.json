@@ -47,6 +47,12 @@
 								"variableName": "Files",
 								"value": "inventory_sets"
 							}
+						},
+						{
+							"name": "Append Part Relationships",
+							"type": "AppendVariable",
+							"dependsOn": [],
+							"userProperties": []
 						}
 					]
 				}
