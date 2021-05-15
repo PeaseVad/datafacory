@@ -6,10 +6,6 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"FileName": {
-				"type": "string",
-				"defaultValue": "FileName"
-			},
 			"TargetFileName": {
 				"type": "String",
 				"defaultValue": "TargetFileName"
