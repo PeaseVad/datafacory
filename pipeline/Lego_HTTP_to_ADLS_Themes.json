@@ -78,7 +78,13 @@
 				"outputs": [
 					{
 						"referenceName": "DestinationDataset_xnl",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"FileName": {
+								"value": "@pipeline().parameters.FileName",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
