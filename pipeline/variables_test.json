@@ -1,0 +1,14 @@
+{
+	"name": "variables_test",
+	"properties": {
+		"variables": {
+			"Files": {
+				"type": "String"
+			},
+			"ListOfFiles": {
+				"type": "Array"
+			}
+		},
+		"annotations": []
+	}
+}
