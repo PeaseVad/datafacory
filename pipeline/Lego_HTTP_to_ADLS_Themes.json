@@ -78,7 +78,10 @@
 				"outputs": [
 					{
 						"referenceName": "DestinationDataset_xnl",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"TargetFileName": "TargetFileName"
+						}
 					}
 				]
 			}

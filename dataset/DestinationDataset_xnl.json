@@ -5,12 +5,25 @@
 			"referenceName": "ADLS_cathrinewadlsva",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"FileName": {
+				"type": "string",
+				"defaultValue": "FileName"
+			},
+			"TargetFileName": {
+				"type": "String",
+				"defaultValue": "TargetFileName"
+			}
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "themes.csv",
+				"fileName": {
+					"value": "@dataset().TargetFileName",
+					"type": "Expression"
+				},
 				"folderPath": "data",
 				"fileSystem": "lego"
 			},
