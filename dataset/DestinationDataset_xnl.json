@@ -6,9 +6,9 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"TargetFileName": {
+			"FileName": {
 				"type": "string",
-				"defaultValue": "TargetFileName"
+				"defaultValue": "FileName"
 			}
 		},
 		"annotations": [],
