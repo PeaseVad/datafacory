@@ -1,0 +1,41 @@
+{
+	"name": "ADLS_Config",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLS_cathrinewadlsva",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "config.txt",
+				"folderPath": "config",
+				"fileSystem": "lego"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "SourceSystem",
+				"type": "String"
+			},
+			{
+				"name": "SourceFileName",
+				"type": "String"
+			},
+			{
+				"name": "SourceFileExtension",
+				"type": "String"
+			},
+			{
+				"name": "IsActive",
+				"type": "String"
+			}
+		]
+	}
+}
