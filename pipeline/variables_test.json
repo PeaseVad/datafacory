@@ -10,17 +10,35 @@
 				"typeProperties": {
 					"variableName": "Files",
 					"value": [
-						""
+						"colors",
+						"inventories",
+						"inventory_parts",
+						"part_categories",
+						"parts",
+						"sets",
+						"themes"
 					]
 				}
 			},
 			{
 				"name": "If Condition1",
 				"type": "IfCondition",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "SetFiles",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": []
 			}
 		],
+		"parameters": {
+			"LoadAllFiles": {
+				"type": "bool"
+			}
+		},
 		"variables": {
 			"Files": {
 				"type": "Array"
