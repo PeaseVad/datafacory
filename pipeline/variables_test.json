@@ -3,10 +3,10 @@
 	"properties": {
 		"variables": {
 			"Files": {
-				"type": "String"
+				"type": "Array"
 			},
 			"ListOfFiles": {
-				"type": "Array"
+				"type": "String"
 			}
 		},
 		"annotations": []
