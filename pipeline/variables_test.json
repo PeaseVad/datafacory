@@ -67,6 +67,23 @@
 						}
 					]
 				}
+			},
+			{
+				"name": "Set List of files",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "If Condition1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "ListOfFiles",
+					"value": ""
+				}
 			}
 		],
 		"parameters": {
