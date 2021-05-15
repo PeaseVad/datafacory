@@ -82,7 +82,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "ListOfFiles",
-					"value": ""
+					"value": {
+						"value": "Load @{length(variables('Files'))} files: @{join(variables('Files'),',' )}",
+						"type": "Expression"
+					}
 				}
 			}
 		],
