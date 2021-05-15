@@ -89,6 +89,10 @@
 					"items": {
 						"value": "@activity('Lookup Config').output.value",
 						"type": "Expression"
+					},
+					"condition": {
+						"value": "@equals(item().IsActive, 1)",
+						"type": "Expression"
 					}
 				}
 			}
